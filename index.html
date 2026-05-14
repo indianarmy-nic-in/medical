@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Mani E-Book</title>
+
+    <!-- iPhone Home Screen Icon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="icon.png">
+
+    <!-- Website Favicon -->
+    <link rel="icon" type="image/png" href="icon.png">
+
+</head>
+
+<body>
+
+    
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Military Medical Portal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        :root {
+            --primary: #1B5E20;
+            --accent: #3D5AFE;
+            --success: #4CD964;
+            --soft-3d: 0 8px 16px rgba(0,0,0,0.1), inset 0 2px 4px rgba(255,255,255,0.3);
+        }
+
+        * { box-sizing: border-box; -webkit-user-select: none; user-select: none; margin: 0; padding: 0; text-transform: capitalize; }
+        body, html { width: 100%; height: 100%; font-family: 'Segoe UI', sans-serif; background-color: #F0F2F5; overflow: hidden; }
+
+        #preloader { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 100000; background: #000; }
+        .preloader-img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+        #location-finder, #process-loader { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #FFF; z-index: 99999; display: none; flex-direction: column; justify-content: center; align-items: center; }
+        .anim-image { width: 250px; height: 100px; object-fit: contain; margin-bottom: 20px; }
+
+
+/* टेक्स्ट के लिए पल्स एनीमेशन */
+.tracking-text {
+    font-weight: bold;
+    color: #555;
+    margin-top: 20px;
+    animation: textPulse 1.5s infinite ease-in-out; /* एनीमेशन यहाँ जोड़ा गया है */
+}
+
+@keyframes textPulse {
+    0% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.98); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+
+
+
+        
+        #process-loader { background: rgba(255,255,255,0.9); z-index: 90000; }
+        .spinner { width: 50px; height: 50px; border: 5px solid #F3F3F3; border-top: 5px solid var(--accent); border-radius: 50%; animation: spin 1s linear infinite; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        #popup-box { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.5); background: #FFF; padding: 25px; border-radius: 20px; box-shadow: 0 20px 50px rgba(0,0,0,0.3); z-index: 100001; text-align: center; display: none; transition: 0.3s; width: 85%; max-width: 350px; border: 2px solid var(--primary); }
+        #popup-box.active { transform: translate(-50%, -50%) scale(1); display: block; }
+
+        .page-banner { width: 100%; height: 220px; background-size: cover; background-position: center; display: flex; align-items: center; justify-content: center; border-bottom: 4px solid var(--primary); box-shadow: var(--soft-3d); }
+        .logo-container { position: relative; width: 100px; height: 100px; overflow: hidden; border-radius: 12px; box-shadow: var(--soft-3d); }
+        .shining-logo { width: 100%; height: 100%; object-fit: contain; }
+        .logo-container::after { content: ""; position: absolute; top: -50%; left: -100%; width: 50%; height: 200%; background: rgba(255,255,255,0.4); transform: rotate(30deg); animation: shine 2s infinite; }
+        @keyframes shine { 0% { left: -100%; } 100% { left: 150%; } }
+
+        .location-bar { padding: 12px 15px; display: flex; align-items: center; font-size: 14px; color: var(--accent); font-weight: bold; }
+        .location-bar i { margin-right: 8px; font-size: 18px; }
+
+        .screen { display: none; width: 100%; height: 100vh; overflow-y: auto; padding-bottom: 120px; animation: fadeIn 0.4s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .card-3d { background: #FFF; border-radius: 18px; margin: 15px; padding: 22px; box-shadow: var(--soft-3d); border: 1px solid rgba(0,0,0,0.05); }
+        .input-style { width: 100%; padding: 14px; margin-bottom: 18px; border: 1px solid #DDD; border-radius: 10px; font-size: 16px; background: #FDFDFD; box-shadow: inset 2px 2px 5px rgba(0,0,0,0.05); }
+        .btn-3d { width: 100%; padding: 16px; background: linear-gradient(145deg, #2E7D32, #1B5E20); color: white; border: none; border-radius: 12px; font-weight: bold; font-size: 16px; box-shadow: 0 4px 0 #0E3512; cursor: pointer; }
+
+        .id-card-wrapper { width: 320px; height: 200px; margin: 15px auto; perspective: 1000px; }
+        .id-card-inner { position: relative; width: 100%; height: 100%; transition: transform 0.6s; transform-style: preserve-3d; border-radius: 12px; box-shadow: var(--soft-3d); }
+        .id-card-inner.flipped { transform: rotateY(180deg); }
+        .card-face { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: 12px; overflow: hidden; }
+        .card-face img { width: 100%; height: 100%; object-fit: fill; }
+        .card-back { transform: rotateY(180deg); }
+
+        .info-row { display: flex; justify-content: space-between; padding: 10px 5px; border-bottom: 1px solid #EEE; font-size: 12px; gap: 8px; align-items: center; }
+        .info-label { color: #666; min-width: 110px; }
+        .info-value { font-weight: bold; color: #000; text-align: right; display: flex; align-items: center; justify-content: flex-end; }
+        .small-icon { width: 14px; height: 14px; margin-right: 5px; object-fit: contain; }
+        .blink { background: var(--success); color: white; border: none; padding: 10px 20px; border-radius: 20px; font-weight: bold; animation: blinker 1.5s linear infinite; }
+        @keyframes blinker { 50% { opacity: 0.4; } }
+
+        .accordion { background-color: #FFF; color: #444; cursor: pointer; padding: 18px; width: 100%; text-align: left; border: none; outline: none; transition: 0.4s; border-bottom: 1px solid #EEE; font-weight: bold; display: flex; justify-content: space-between; align-items: center; }
+        .panel { padding: 0 18px; background-color: white; display: none; overflow: hidden; font-size: 13px; line-height: 1.6; color: #555; border-bottom: 1px solid #EEE; padding-bottom: 15px; text-transform: none; }
+
+        .bottom-nav { position: fixed; bottom: 0; width: 100%; height: 75px; background: #FFF; display: flex; justify-content: space-around; align-items: center; border-top: 1px solid #EEE; z-index: 1000; box-shadow: 0 -4px 10px rgba(0,0,0,0.05); }
+        .nav-link { text-align: center; color: #999; text-decoration: none; font-size: 11px; flex: 1; transition: 0.3s; padding: 10px 0; }
+        .nav-link i { font-size: 24px; display: block; margin-bottom: 4px; }
+        .nav-link.active { color: var(--accent); font-weight: bold; }
+    </style>
+</head>
+<body onclick="closePopup()">
+
+    <div id="preloader"><img src="https://images.unsplash.com/photo-1579389083078-4e7018379f7e?q=80&w=1080&auto=format&fit=crop" class="preloader-img"></div>
+  <div id="location-finder">
+    <img src="https://assets-v2.lottiefiles.com/a/5de17b98-4485-11f0-a60c-8b3eb8494a4a/f3oFS54DYL.gif" class="anim-image" alt="Tracking">
+    <!-- यहाँ क्लास 'tracking-text' जोड़ें -->
+    <p class="tracking-text">Tracking Your Location...</p>
+</div>
+
+    <div id="process-loader"><div class="spinner"></div><p style="margin-top:20px; font-weight:bold;">Processing Appointment...</p></div>
+
+    <div id="popup-box" onclick="event.stopPropagation()">
+        <div style="font-size: 40px; color: var(--success); margin-bottom: 10px;"><i class="fa fa-check-circle"></i></div>
+        <h2 style="font-size: 17px; margin-bottom: 10px;" id="token-display">Your MH Token No. MH0000000</h2>
+        <div style="border-top: 1px solid #EEE; padding-top: 10px; font-size: 14px;">
+            <p><b>Dr Awasthi Nayar</b></p>
+            <p>Medical Officer (MO)</p>
+            <p>HQ I Corps Strike 1 Core Mathura</p>
+        </div>
+    </div>
+
+    <div id="screen1" class="screen" style="display: block;">
+        <div class="page-banner" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?q=80&w=1000&auto=format&fit=crop');">
+            <div class="logo-container"><img src="logo.png" class="shining-logo" onerror="this.src='https://via.placeholder.com/100/1B5E20/FFFFFF?text=LOGO'"></div>
+        </div>
+        <div class="location-bar"><i class="fa fa-map-marker"></i> Govindnagar, 281003</div>
+        <div class="card-3d">
+            <form id="appointmentForm" onsubmit="handleBooking(event)">
+                <label style="font-weight:bold; display:block; margin-bottom:8px;">Patient Name *</label>
+                <input type="text" class="input-style" placeholder="Enter Full Name" required>
+                <label style="font-weight:bold; display:block; margin-bottom:8px;">Connection *</label>
+                <select class="input-style" required><option value="">Select Option</option><option>HCJCICIC</option></select>
+                <label style="font-weight:bold; display:block; margin-bottom:8px;">Patient Age *</label>
+                <input type="number" class="input-style" placeholder="Age" required>
+                <label style="font-weight:bold; display:block; margin-bottom:8px;">Enter Your MI ID *</label>
+                <input type="text" class="input-style" style="width: 55%;" placeholder="ID Number" required>
+                <button type="submit" class="btn-3d">Book Appointment</button>
+            </form>
+        </div>
+        <div style="height: 100px;"></div>
+    </div>
+
+    <div id="screen2" class="screen">
+        <div class="page-banner" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1506784983877-45594efa4cbe?q=80&w=1000&auto=format&fit=crop');">
+            <div class="logo-container"><img src="logo.png" class="shining-logo" onerror="this.src='https://via.placeholder.com/100/1B5E20/FFFFFF?text=LOGO'"></div>
+        </div>
+        <div class="card-3d">
+            <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:15px;">
+                <button class="blink">Activate</button>
+                <div style="width:100px; height:100px; border:2px solid #DDD; border-radius:10px; overflow:hidden;"><img src="officer.png" style="width:100%; height:100%; object-fit:cover;" onerror="this.src='https://via.placeholder.com/110/F0F0F0/666666?text=PHOTO'"></div>
+            </div>
+            
+            <div class="id-card-wrapper" onclick="this.querySelector('.id-card-inner').classList.toggle('flipped')">
+                <div class="id-card-inner">
+                    <div class="card-face"><img src="front.png" onerror="this.src='https://via.placeholder.com/320x200/FFFFFF/000000?text=FRONT+ID'"></div>
+                    <div class="card-face card-back"><img src="back.png" onerror="this.src='https://via.placeholder.com/320x200/1B5E20/FFFFFF?text=BACK+ID'"></div>
+                </div>
+            </div>
+
+            <div class="info-row"><span class="info-label">Name</span><span class="info-value">Manish Chaudhary</span></div>
+            <div class="info-row"><span class="info-label">Allegiance</span><span class="info-value"><img src="https://flagcdn.com/w20/in.png" class="small-icon">India</span></div>
+            <div class="info-row"><span class="info-label">Branch</span><span class="info-value">Indian Army</span></div>
+            <div class="info-row"><span class="info-label">Years Of Service</span><span class="info-value">13 June 2020 - Serving</span></div>
+            <div class="info-row"><span class="info-label">Rank</span><span class="info-value"><img src="https://www.bharat-rakshak.com/army/wp-content/uploads/sites/2/2006/10/Major.gif" class="small-icon">Major</span></div>
+            <div class="info-row"><span class="info-label">Service Number</span><span class="info-value">IC-80129D</span></div>
+            <div class="info-row"><span class="info-label">Unit</span><span class="info-value">18 Dogra</span></div>
+            <div class="info-row"><span class="info-label">Medical Number</span><span class="info-value">MH87551298A</span></div>
+            <div class="info-row"><span class="info-label">Weight</span><span class="info-value">96 KG (211.64 lbs)</span></div>
+            <div class="info-row"><span class="info-label">Height</span><span class="info-value">6.3 Inch (190.5 CM)</span></div>
+            <div class="info-row"><span class="info-label">ID Mark</span><span class="info-value">Scar Above Right Eye</span></div>
+            <div class="info-row"><span class="info-label">Blood Group</span><span class="info-value">B+ve</span></div>
+            <div class="info-row"><span class="info-label">Hair</span><span class="info-value">Black</span></div>
+            <div class="info-row"><span class="info-label">Eye</span><span class="info-value">Black</span></div>
+
+<div class="info-row"><span class="info-label">Beard</span><span class="info-value"> (CO) May Grant Permission Neat, Well-Groomed </span></div>
+
+
+            <div class="info-row"><span class="info-label">Overall Report</span><span class="info-value" style="color:var(--primary);">All Fit</span></div>
+        </div>
+    </div>
+
+    <div id="screen3" class="screen" style="display:flex; flex-direction:column;">
+        <div class="page-banner" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1454165833767-6226d17160d7?q=80&w=1000&auto=format&fit=crop');">
+            <div class="logo-container"><img src="logo.png" class="shining-logo" onerror="this.src='https://via.placeholder.com/100/1B5E20/FFFFFF?text=LOGO'"></div>
+        </div>
+        <div class="card-3d" style="padding:0; overflow:hidden;">
+            <button class="accordion" onclick="toggleAcc(this)">Term & Condition <i class="fa fa-chevron-down"></i></button>
+            <div class="panel">Official medical portal for Armed Forces personnel. Unauthorized access is punishable.</div>
+            <button class="accordion" onclick="toggleAcc(this)">Medical Insurance <i class="fa fa-chevron-down"></i></button>
+            <div class="panel">Cashless coverage at all Military Hospitals and empanelled centers.</div>
+            <button class="accordion" onclick="toggleAcc(this)">Dependent Insurance <i class="fa fa-chevron-down"></i></button>
+            <div class="panel">Medical benefits for registered dependents including spouse and children.</div>
+            <button class="accordion" onclick="toggleAcc(this)">Submit Complain <i class="fa fa-chevron-down"></i></button>
+            <div class="panel">Log complaints for MI ID issues or token delays here.</div>
+        </div>
+        <div style="text-align:center; padding:20px; margin-top:auto;">
+            <img src="small-logo.png" style="width:35px; margin-bottom:8px;" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/b/b5/Armed_forces_logo.png'">
+            <p style="font-weight:900; font-size:16px;">Indian Armed Forces</p>
+            <p style="font-size:11px; color:#555;">Medical Care Life Time Limited New Delhi</p>
+            <p style="font-size:11px; color:#555;">Government Of India</p>
+        </div>
+    </div>
+
+    <nav class="bottom-nav">
+        <a href="javascript:void(0)" onclick="nav('screen1', this)" class="nav-link active"><i class="fa fa-home"></i>Home</a>
+        <a href="javascript:void(0)" onclick="nav('screen2', this)" class="nav-link"><i class="fa fa-id-card"></i>Profile</a>
+        <a href="javascript:void(0)" onclick="nav('screen3', this)" class="nav-link"><i class="fa fa-bars"></i>Menu</a>
+    </nav>
+
+    <script>
+        window.onload = () => {
+            setTimeout(() => {
+                document.getElementById('preloader').style.display = 'none';
+                document.getElementById('location-finder').style.display = 'flex';
+                setTimeout(() => document.getElementById('location-finder').style.display = 'none', 5000);
+            }, 4000);
+        };
+
+        function nav(id, el) {
+            document.querySelectorAll('.screen').forEach(s => s.style.display='none');
+            document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+            document.getElementById(id).style.display = (id === 'screen3' ? 'flex' : 'block');
+            el.classList.add('active');
+            window.scrollTo(0,0);
+        }
+
+        function handleBooking(e) {
+            e.preventDefault();
+            document.getElementById('process-loader').style.display = 'flex';
+            setTimeout(() => {
+                document.getElementById('process-loader').style.display = 'none';
+                // Dynamic Token Generator
+                const randToken = "MH" + Math.floor(10000000 + Math.random() * 90000000);
+                document.getElementById('token-display').innerText = "Your MH Token No. " + randToken;
+                document.getElementById('popup-box').classList.add('active');
+            }, 4000);
+        }
+
+        function closePopup() {
+            if(document.getElementById('popup-box').classList.contains('active')) {
+                document.getElementById('popup-box').classList.remove('active');
+                document.getElementById('appointmentForm').reset();
+            }
+        }
+
+        function toggleAcc(el) {
+            var panel = el.nextElementSibling;
+            if (panel.style.display === "block") {
+                panel.style.display = "none";
+                el.querySelector('i').className = "fa fa-chevron-down";
+            } else {
+                panel.style.display = "block";
+                el.querySelector('i').className = "fa fa-chevron-up";
+            }
+        }
+    </script>
+</body>
+</html>
