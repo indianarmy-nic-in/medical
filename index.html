@@ -21,10 +21,10 @@
 <meta name="theme-color" content="#000000">
 
 <!-- App Icon -->
-<link rel="apple-touch-icon" sizes="180x180" href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgpsE4rjnRIluN6UJMQoDBTfAPsq0EeUreMDeA98AFwrdszNU-smHiyWEbz7iy0p8SBfM3kbnIf1Uwe8bmkm3g4BYvMuKV_QL2gEg4bbVLhZ66BAcALanUBV7QbmpDV7BUVPanHy38yFVrEInWq1SA6us7Y786NlI5tyHyxFcPNX6q5PylspQJQh3p7EA-P/s384/Untitled%20design.png">
+<link rel="apple-touch-icon" sizes="180x180" href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgIghnd81b4IV_bCotk87s2-47fScJBJLe3NjpD2sQmst1Efhh04vR6P6TmZde2BSYc6_TJ1fNdrb7Yc4osE3VsEMghyDYEyXKDUKJQZo8vv71iH6wpaFAnop99Yv4k50u9xRMqQucYLqtKZ1PY0qD4EG2HtMMaI44II9S-kopaVutf4XTGRX4zNq6Aichc/s768/Untitled%20design.jpeg">
 
 <!-- Favicon -->
-<link rel="icon" type="image/png" href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgpsE4rjnRIluN6UJMQoDBTfAPsq0EeUreMDeA98AFwrdszNU-smHiyWEbz7iy0p8SBfM3kbnIf1Uwe8bmkm3g4BYvMuKV_QL2gEg4bbVLhZ66BAcALanUBV7QbmpDV7BUVPanHy38yFVrEInWq1SA6us7Y786NlI5tyHyxFcPNX6q5PylspQJQh3p7EA-P/s384/Untitled%20design.png">
+<link rel="icon" type="image/png" href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgIghnd81b4IV_bCotk87s2-47fScJBJLe3NjpD2sQmst1Efhh04vR6P6TmZde2BSYc6_TJ1fNdrb7Yc4osE3VsEMghyDYEyXKDUKJQZo8vv71iH6wpaFAnop99Yv4k50u9xRMqQucYLqtKZ1PY0qD4EG2HtMMaI44II9S-kopaVutf4XTGRX4zNq6Aichc/s768/Untitled%20design.jpeg">
 
 <!-- Manifest -->
 <link rel="manifest" href="manifest.json">
@@ -41,7 +41,7 @@ const manifestData = {
     "orientation": "portrait",
     "icons": [
         {
-            "src": "https://cdn-icons-png.flaticon.com/512/9796/9796520.png",
+            "src": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgIghnd81b4IV_bCotk87s2-47fScJBJLe3NjpD2sQmst1Efhh04vR6P6TmZde2BSYc6_TJ1fNdrb7Yc4osE3VsEMghyDYEyXKDUKJQZo8vv71iH6wpaFAnop99Yv4k50u9xRMqQucYLqtKZ1PY0qD4EG2HtMMaI44II9S-kopaVutf4XTGRX4zNq6Aichc/s768/Untitled%20design.jpeg",
             "sizes": "180x180",
             "type": "image/png"
         }
@@ -69,6 +69,7 @@ body, html{
     overflow:hidden;
     background:#000;
     font-family:sans-serif;
+    overscroll-behavior-y: none; /* यह ऊपर की तरफ स्क्रॉलिंग रोकता है */
 }
 
 /* Demo Fullscreen App */
@@ -125,7 +126,7 @@ body, html{
         }
 
         * { box-sizing: border-box; -webkit-user-select: none; user-select: none; margin: 0; padding: 0; text-transform: capitalize; }
-        body, html { width: 100%; height: 100%; font-family: 'Segoe UI', sans-serif; background-color: #F0F2F5; overflow: hidden; }
+        body, html { width: 100%; height: 100%; font-family: 'Segoe UI', sans-serif; background-color: #F0F2F5; overflow: hidden; overscroll-behavior-y: none; }
 
         #preloader { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 100000; background: #000; }
         .preloader-img { width: 100%; height: 100%; object-fit: cover; display: block; }
@@ -168,7 +169,7 @@ body, html{
         .location-bar { padding: 12px 15px; display: flex; align-items: center; font-size: 14px; color: var(--accent); font-weight: bold; }
         .location-bar i { margin-right: 8px; font-size: 18px; }
 
-        .screen { display: none; width: 100%; height: 100vh; overflow-y: auto; padding-bottom: 120px; animation: fadeIn 0.4s ease; }
+        .screen { display: none; width: 100%; height: 100vh; overflow-y: auto; padding-bottom: 120px; animation: fadeIn 0.4s ease; -webkit-overflow-scrolling: touch; overscroll-behavior-y: none; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         
         .card-3d { background: #FFF; border-radius: 18px; margin: 15px; padding: 22px; box-shadow: var(--soft-3d); border: 1px solid rgba(0,0,0,0.05); }
