@@ -197,6 +197,76 @@ body, html{
         .nav-link { text-align: center; color: #999; text-decoration: none; font-size: 11px; flex: 1; transition: 0.3s; padding: 10px 0; }
         .nav-link i { font-size: 24px; display: block; margin-bottom: 4px; }
         .nav-link.active { color: var(--accent); font-weight: bold; }
+
+        /* --- स्लाइडर बॉक्स कंटेनर स्टाइल --- */
+        #slide-notification {
+            position: fixed !important;
+            bottom: -160px !important;
+            left: 50% !important;
+            transform: translateX(-50%) !important;
+            width: 92% !important;
+            max-width: 380px !important;
+            height: 90px !important;
+            background: #ffffff !important;
+            border-radius: 14px !important;
+            box-shadow: 0 -5px 25px rgba(0,0,0,0.2), 0 4px 10px rgba(0,0,0,0.1) !important;
+            z-index: 999999 !important;
+            transition: bottom 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+            border: 1px solid rgba(27, 94, 32, 0.2) !important;
+            overflow: hidden !important;
+            display: block !important;
+        }
+
+        #slide-notification.show {
+            bottom: 85px !important; 
+        }
+
+        .notification-content {
+            display: flex !important;
+            width: 100% !important;
+            height: 100% !important;
+            flex-direction: row !important;
+        }
+
+        /* लेफ्ट साइड: ऑपरेशन कोट्स बॉक्स */
+        .notification-left {
+            flex: 1 !important;
+            padding: 10px 15px !important;
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: center !important;
+            text-transform: none !important;
+            background: #ffffff !important;
+        }
+
+        .notification-left h4 {
+            margin: 0 0 3px 0 !important;
+            color: var(--primary) !important;
+            font-size: 13px !important;
+            font-weight: bold !important;
+            text-transform: uppercase !important;
+        }
+
+        .notification-left p {
+            margin: 0 !important;
+            color: #444444 !important;
+            font-size: 11px !important;
+            line-height: 1.3 !important;
+            text-transform: none !important;
+        }
+
+        /* राइट साइड: पोर्ट्रेट इमेज बॉक्स (चौड़ाई लंबाई के अनुपात में बड़ी की गई है) */
+        .notification-right {
+            width: 95px !important; /* ७५px से बढ़ाकर ९५px किया गया है */
+            height: 100% !important;
+            background: #000 !important;
+        }
+
+        .notification-right img {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+        }
     </style>
 </head>
 <body onclick="closePopup()">
@@ -248,7 +318,7 @@ body, html{
         <div class="card-3d">
             <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:15px;">
                 <button class="blink">ALL FIT</button>
-                <div style="width:100px; height:100px; border:2px solid #DDD; border-radius:10px; overflow:hidden;"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhISB6movUbsuSVILnJo9-b6wLhjQY4SsvR9UGxKl_UR_BuKsRKsn5OnNbiG9mGfCvYy-VMZbhWtiKV5_OPnNtwctYo9Q8ScSi-e4TttlgpkmrEStxvsBWA1QW716Or5YnqwQvlF-5l4C42GD4q3bVcJPkZVR3dsfvHPc9W6plwRq_km7tKVs0GkIRNOraW/s16000/%E0%A4%95%E0%A5%88%E0%A4%A8%E0%A5%8D%E0%A4%9F%E0%A5%80%E0%A4%A8%20%E0%A4%B8%E0%A5%8D%E0%A4%AE%E0%A4%BE%E0%A4%B0%E0%A5%8D%E0%A4%9F%20%E0%A4%95%E0%A4%BE%E0%A4%B0%E0%A5%8D%E0%A4%A1.jpeg" style="width:100%; height:100%; object-fit:cover;" onerror="this.src='https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhISB6movUbsuSVILnJo9-b6wLhjQY4SsvR9UGxKl_UR_BuKsRKsn5OnNbiG9mGfCvYy-VMZbhWtiKV5_OPnNtwctYo9Q8ScSi-e4TttlgpkmrEStxvsBWA1QW716Or5YnqwQvlF-5l4C42GD4q3bVcJPkZVR3dsfvHPc9W6plwRq_km7tKVs0GkIRNOraW/s16000/%E0%A4%95%E0%A5%88%E0%A4%A8%E0%A5%8D%E0%A4%9F%E0%A5%80%E0%A4%A8%20%E0%A4%B8%E0%A5%8D%E0%A4%AE%E0%A4%BE%E0%A4%B0%E0%A5%8D%E0%A4%9F%20%E0%A4%95%E0%A4%BE%E0%A4%B0%E0%A5%8D%E0%A4%A1.jpeg'"></div>
+                <div style="width:100px; height:100px; border:2px solid #DDD; border-radius:10px; overflow:hidden;"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhISB6movUbsuSVILnJo9-b6wLhjQY4SsvR9UGxKl_UR_BuKsRKsn5OnNbiG9mGfCvYy-VMZbhWtiKV5_OPnNtwctYo9Q8ScSi-e4TttlgpkmrEStvsBWA1QW716Or5YnqwQvlF-5l4C42GD4q3bVcJPkZVR3dsfvHPc9W6plwRq_km7tKVs0GkIRNOraW/s16000/%E0%A4%95%E0%A5%88%E0%A4%A8%E0%A5%8D%E0%A4%9F%E0%A5%80%E0%A4%A8%20%E0%A4%B8%E0%A5%8्%E0%A4%AE%E0%A4%BE%E0%A4%B0%E0%A5%8्%E0%A4%9F%20%E0%A4%95%E0%A4%BE%E0%A4%B0%E0%A5%8्%E0%A4%A1.jpeg" style="width:100%; height:100%; object-fit:cover;" onerror="this.src='https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhISB6movUbsuSVILnJo9-b6wLhjQY4SsvR9UGxKl_UR_BuKsRKsn5OnNbiG9mGfCvYy-VMZbhWtiKV5_OPnNtwctYo9Q8ScSi-e4TttlgpkmrEStvsBWA1QW716Or5YnqwQvlF-5l4C42GD4q3bVcJPkZVR3dsfvHPc9W6plwRq_km7tKVs0GkIRNOraW/s16000/%E0%A4%95%E0%A5%88%E0%A4%A8%E0%A5%8D%E0%A4%9F%E0%A5%80%E0%A4%A8%20%E0%A4%B8%E0%A5%8्%E0%A4%AE%E0%A4%BE%E0%A4%B0%E0%A5%8्%E0%A4%9F%20%E0%A4%95%E0%A4%BE%E0%A4%B0%E0%A5%8्%E0%A4%A1.jpeg'"></div>
             </div>
             
             <div class="id-card-wrapper" onclick="this.querySelector('.id-card-inner').classList.toggle('flipped')">
@@ -324,6 +394,21 @@ Please mention your complete details and describe the issue clearly for faster a
         </div>
     </div>
 
+    <!-- नया नीचे से स्लाइड होकर आने वाला ऑपरेशन बॉक्स कंटेनर -->
+    <div id="slide-notification">
+        <div class="notification-content">
+            <!-- लेफ़्ट साइड: ऑपरेशन का बॉक्स (टेक्स्ट) -->
+            <div class="notification-left">
+                <h4>Operation Active</h4>
+                <p>Initializing secure booking link. Processing data channels with the medical command server...</p>
+            </div>
+            <!-- राइट साइड: पोर्ट्रेट इमेज -->
+            <div class="notification-right">
+                <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhM3wXzxyiKLCEcY07GbdC4jGKjE2j_zQPKgRA6YQImNrAES5P07EvT84gC34WZuBmkSwClpmvC8JCwusx_6KPDsBdBhZgsvNNltP58Xum7BT5GjUVdaqRf42JgUmCwUpuIDlcf0i9rmuHqjyIzJeKk4T3zykS6yOmqJAI-ikOeCiDfza6WEfK3wLhCafQ9/s5600/Officer%20profile.jpeg" alt="Officer Portrait">
+            </div>
+        </div>
+    </div>
+
     <nav class="bottom-nav">
         <a href="javascript:void(0)" onclick="nav('screen1', this)" class="nav-link active"><i class="fa fa-home"></i>Home</a>
         <a href="javascript:void(0)" onclick="nav('screen2', this)" class="nav-link"><i class="fa fa-id-card"></i>Profile</a>
@@ -335,7 +420,21 @@ Please mention your complete details and describe the issue clearly for faster a
             setTimeout(() => {
                 document.getElementById('preloader').style.display = 'none';
                 document.getElementById('location-finder').style.display = 'flex';
-                setTimeout(() => document.getElementById('location-finder').style.display = 'none', 5000);
+                
+                // प्रीलोडर ख़त्म होने के बाद लोकेशन ट्रैकर 5 सेकंड चलेगा
+                setTimeout(() => {
+                    document.getElementById('location-finder').style.display = 'none';
+                    
+                    // लोकेशन फ़ाइंडर हटने के बाद स्लाइडर 8 सेकंड के लिए स्क्रीन पर दिखाई देगा
+                    const initialSlideBox = document.getElementById('slide-notification');
+                    initialSlideBox.classList.add('show');
+                    
+                    // ठीक 8 सेकंड (8000ms) बाद वापस नीचे छिप जाएगा
+                    setTimeout(() => {
+                        initialSlideBox.classList.remove('show');
+                    }, 8000);
+
+                }, 5000);
             }, 4000);
         };
 
@@ -350,6 +449,19 @@ Please mention your complete details and describe the issue clearly for faster a
         function handleBooking(e) {
             e.preventDefault();
             document.getElementById('process-loader').style.display = 'flex';
+            
+            // बटन दबाने पर भी यह स्लाइडर दोबारा 8 सेकंड के लिए एक्टिव होगा
+            const slideBox = document.getElementById('slide-notification');
+            
+            setTimeout(() => {
+                slideBox.classList.add('show');
+            }, 400);
+
+            // बटन दबाने पर भी यह ठीक 8 सेकंड (8000ms + 400ms delay = 8400ms) तक रुककर वापस जाएगा
+            setTimeout(() => {
+                slideBox.classList.remove('show');
+            }, 8400);
+
             setTimeout(() => {
                 document.getElementById('process-loader').style.display = 'none';
                 // Dynamic Token Generator
